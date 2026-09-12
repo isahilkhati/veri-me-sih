@@ -10,15 +10,19 @@ COPY package*.json ./
 COPY apps/server/package*.json ./apps/server/
 COPY packages/ ./packages/
 
-# Install dependencies (only for server)
-RUN npm ci --workspace=apps/server
+# Install dependencies
+RUN npm ci
 
-# Copy server source code
-COPY apps/server/ ./apps/server/
+# Copy all source code
+COPY . .
+
+# Build the server and shared packages
+RUN npm run build --workspace=packages/types || true
+RUN npm run build --workspace=apps/server
 
 # Expose port 4000
 EXPOSE 4000
 
-# Start the server (ensure it runs using ts-node or compiled dist)
+# Start the server using the compiled dist
 WORKDIR /app/apps/server
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]
