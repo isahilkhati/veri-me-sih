@@ -150,8 +150,8 @@ export default function Home() {
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
         @keyframes float-cursor { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-10px) rotate(-5deg); } }
         .orbit-border {
-          border: 1px solid rgba(160, 104, 255, 0.35);
-          box-shadow: 0 0 30px rgba(160, 104, 255, 0.15), inset 0 0 30px rgba(160, 104, 255, 0.15);
+          border: 1px dashed rgba(160, 104, 255, 0.4);
+          box-shadow: 0 0 20px rgba(160, 104, 255, 0.15);
           border-radius: 50%;
         }
         .fade-down { animation: fadeDown 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
@@ -342,8 +342,8 @@ export default function Home() {
           initial={{ opacity: 0, y: 80, scale: 0.85 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: false, margin: "-150px" }}
-          className="w-full max-w-7xl mx-auto px-6 py-24 border-t border-white/5 relative"
+          viewport={{ once: false, margin: "-100px" }}
+          className="w-full min-h-[100svh] flex flex-col justify-center max-w-7xl mx-auto px-6 py-24 border-t border-white/5 relative"
         >
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">The Talent Verification Crisis</h2>
@@ -384,8 +384,8 @@ export default function Home() {
           initial={{ opacity: 0, y: 80, scale: 0.85 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: false, margin: "-150px" }}
-          className="w-full bg-[#070319] border-y border-white/5 py-24"
+          viewport={{ once: false, margin: "-100px" }}
+          className="w-full min-h-[100svh] flex flex-col justify-center bg-[#070319] border-y border-white/5 py-24"
         >
           <div className="max-w-7xl mx-auto px-6 w-full">
             <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16">Powered by Deep Tech</h2>
@@ -415,8 +415,8 @@ export default function Home() {
           initial={{ opacity: 0, y: 80, scale: 0.85 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: false, margin: "-150px" }}
-          className="w-full max-w-7xl mx-auto px-6 py-24"
+          viewport={{ once: false, margin: "-100px" }}
+          className="w-full min-h-[100svh] flex flex-col justify-center max-w-7xl mx-auto px-6 py-24"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-4">Value for the Ecosystem</h2>
           <p className="text-slate-400 text-center max-w-2xl mx-auto mb-16">Creating a win-win scenario for all 3 major stakeholders.</p>
