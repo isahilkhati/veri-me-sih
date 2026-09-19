@@ -117,9 +117,18 @@ export default function Home() {
   ];
   const repeatedLogos = [...logos, ...logos, ...logos, ...logos];
 
+  const handleSmoothScroll = (e: any, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div className={`min-h-screen bg-[#060218] text-white ${inter.className} overflow-x-hidden`}>
       <style dangerouslySetInnerHTML={{ __html: `
+        html { scroll-behavior: smooth; }
         @property --border-angle { syntax: "<angle>"; inherits: true; initial-value: 0turn; }
         @keyframes rotate-border { to { --border-angle: 1turn; } }
         @keyframes orbit-left { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(-360deg); } }
@@ -128,7 +137,7 @@ export default function Home() {
         @keyframes avatar-fly-in { 0% { transform: scale(0.3) rotate(-180deg); opacity: 0; filter: blur(10px); } 100% { transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0); } }
         @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes scaleIn { from { opacity: 0; transform: scale(0.85) translate(-50%, -50%); transform-origin: top left; } to { opacity: 1; transform: scale(1) translate(-50%, -50%); transform-origin: top left; } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
         @keyframes float-cursor { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-10px) rotate(-5deg); } }
         .orbit-border {
           border: 1px solid transparent;
@@ -137,16 +146,47 @@ export default function Home() {
         }
         .fade-down { animation: fadeDown 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
         .fade-up { animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; opacity: 0; }
-        .scale-in { animation: scaleIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; opacity: 0; }
+        .scale-in { animation: scaleIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; opacity: 0; transform-origin: center; }
         .bg-hero { background: url('https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260624_111401_56af5012-2263-45d3-849a-8688084d7c2a.png&w=1280&q=85') center center / cover no-repeat; }
-        @media (max-width: 1280px) { .hero-circles { transform: scale(0.85); transform-origin: right center; } }
-        @media (max-width: 1024px) { .hero-circles { transform: scale(0.7); transform-origin: center; } .hero-layout { flex-direction: column; text-align: center; gap: 40px; padding-top: 60px; } .hero-left { align-items: center; } .cursor-element { margin-left: 0 !important; right: 20%; } }
-        @media (max-width: 768px) { .hero-circles { transform: scale(0.5); } .mobile-hide { display: none !important; } }
-        @media (max-width: 480px) { .hero-circles { transform: scale(0.4); } }
+        
+        .hero-circles-wrapper {
+           position: relative;
+           width: 100%;
+           max-width: 720px;
+           aspect-ratio: 1/1;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+        }
+        .hero-circles-responsive {
+           transform-origin: center;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           width: 100%;
+           height: 100%;
+        }
+        .hero-circles {
+           position: absolute;
+           width: 720px;
+           height: 720px;
+        }
+        
+        @media (max-width: 1536px) { .hero-circles-responsive { transform: scale(0.85); } }
+        @media (max-width: 1280px) { .hero-circles-responsive { transform: scale(0.70); } .hero-left { flex: 0 1 500px; } }
+        @media (max-width: 1024px) { 
+          .hero-circles-responsive { transform: scale(0.65); } 
+          .hero-circles-wrapper { height: 450px; }
+          .hero-layout { flex-direction: column; text-align: center; gap: 20px; padding-top: 40px; } 
+          .hero-left { align-items: center; flex: none; width: 100%; } 
+          .cursor-element { margin-left: 0 !important; right: 20%; } 
+        }
+        @media (max-width: 768px) { .hero-circles-responsive { transform: scale(0.5); } .hero-circles-wrapper { height: 350px; } .mobile-hide { display: none !important; } }
+        @media (max-width: 480px) { .hero-circles-responsive { transform: scale(0.4); } .hero-circles-wrapper { height: 300px; } }
       `}} />
 
       {/* Hero Section */}
-      <div className="w-full min-h-screen flex flex-col relative overflow-hidden bg-hero pb-12 lg:pb-0">
+      <div className="w-full min-h-[100svh] flex flex-col relative overflow-hidden bg-hero pb-8 lg:pb-0">
         
         {/* Header */}
         <header className="flex justify-between items-center px-6 md:px-[64px] py-[24px] max-w-[1920px] mx-auto w-full fade-down relative z-20">
@@ -156,9 +196,18 @@ export default function Home() {
               <span className={`font-bold tracking-wide text-xl ${urbanist.className}`}>Veri-ME</span>
             </Link>
             <nav className="hidden md:flex gap-8 mobile-hide">
-              <NavLink href="#problem">The Problem</NavLink>
-              <NavLink href="#solution">Platform</NavLink>
-              <NavLink href="#impact">Impact</NavLink>
+              <a href="#problem" onClick={(e) => handleSmoothScroll(e, 'problem')} className="relative group text-white text-[15px] font-medium transition-colors cursor-pointer">
+                The Problem
+                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+              </a>
+              <a href="#solution" onClick={(e) => handleSmoothScroll(e, 'solution')} className="relative group text-white text-[15px] font-medium transition-colors cursor-pointer">
+                Platform
+                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+              </a>
+              <a href="#impact" onClick={(e) => handleSmoothScroll(e, 'impact')} className="relative group text-white text-[15px] font-medium transition-colors cursor-pointer">
+                Impact
+                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-white scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+              </a>
             </nav>
           </div>
           <div className="flex gap-6 items-center">
@@ -173,7 +222,7 @@ export default function Home() {
         <main className="flex-1 flex flex-col lg:flex-row items-center justify-between max-w-[1920px] mx-auto w-full px-6 md:px-[64px] relative z-10 hero-layout">
           
           {/* Hero Left */}
-          <div className="flex-[0_1_600px] pt-[40px] flex flex-col items-start hero-left relative">
+          <div className="flex-[0_1_600px] flex flex-col items-start hero-left relative z-20">
             <div className="fade-up" style={{ animationDelay: '0.2s' }}>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A068FF]/10 border border-[#A068FF]/30 text-[#A068FF] text-sm font-medium mb-8">
                 <span className="relative flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A068FF] opacity-75"></span><span className="relative inline-flex rounded-full h-2 w-2 bg-[#A068FF]"></span></span>
@@ -210,8 +259,10 @@ export default function Home() {
           </div>
 
           {/* Hero Right - Circles */}
-          <div className="relative w-[720px] h-[720px] shrink-0 scale-in hero-circles" style={{ animationDelay: '0.3s', top: '50%', left: '50%' }}>
-            <Orbit size={353} duration={30} direction="left">
+          <div className="hero-circles-wrapper z-10 scale-in" style={{ animationDelay: '0.3s' }}>
+            <div className="hero-circles-responsive">
+              <div className="hero-circles">
+                <Orbit size={353} duration={30} direction="left">
               <Avatar orbitDirection="left" orbitDuration={30} angle={270} img="https://polo-pecan-73837341.figma.site/_assets/v11/aa51718fb3af3637e6d666b6543fc27a175fada6.png" glow="shadow-[0_0_20px_rgba(160,104,255,0.6)]" delay={0.6} rounded="rounded-[20px]" />
             </Orbit>
             <Orbit size={501} duration={40} direction="right">
@@ -239,6 +290,8 @@ export default function Home() {
               </div>
             </div>
           </div>
+          </div>
+          </div>
         </main>
 
         {/* Logo Ticker */}
@@ -254,14 +307,21 @@ export default function Home() {
       {/* --- EXISTING SECTIONS (Integrated seamlessly below hero) --- */}
       <div className="relative z-10 bg-[#060218]">
         {/* COMPARISON SECTION */}
-        <section id="problem" className="w-full max-w-7xl mx-auto px-6 py-24 border-t border-white/5 relative">
+        <motion.section 
+          id="problem" 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="w-full max-w-7xl mx-auto px-6 py-24 border-t border-white/5 relative"
+        >
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">The Talent Verification Crisis</h2>
             <p className="text-slate-400 max-w-2xl mx-auto">Over 55% of candidates exaggerate skills. Traditional screening is broken.</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="p-8 rounded-3xl bg-slate-900/50 border border-red-500/10">
+            <div className="p-8 rounded-3xl bg-slate-900/50 border border-red-500/10 hover:border-red-500/30 transition-colors">
               <div className="flex items-center gap-3 mb-6">
                 <ShieldAlert className="w-6 h-6 text-red-400" />
                 <h3 className="text-xl font-bold text-slate-300">The Old Way (Broken)</h3>
@@ -273,8 +333,8 @@ export default function Home() {
               </ul>
             </div>
 
-            <div className="p-8 rounded-3xl bg-gradient-to-b from-[#A068FF]/10 to-transparent border border-[#A068FF]/20 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-[#A068FF]/10 blur-[100px] rounded-full"></div>
+            <div className="p-8 rounded-3xl bg-gradient-to-b from-[#A068FF]/10 to-transparent border border-[#A068FF]/20 relative overflow-hidden group hover:border-[#A068FF]/50 transition-colors">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#A068FF]/10 blur-[100px] rounded-full group-hover:bg-[#A068FF]/20 transition-colors"></div>
               <div className="flex items-center gap-3 mb-6 relative z-10">
                 <ShieldCheck className="w-6 h-6 text-[#A068FF]" />
                 <h3 className="text-xl font-bold text-white">The Veri-ME Way</h3>
@@ -286,31 +346,86 @@ export default function Home() {
               </ul>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* CORE FEATURES */}
-        <section id="solution" className="w-full bg-[#070319] border-y border-white/5 py-24">
+        <motion.section 
+          id="solution" 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="w-full bg-[#070319] border-y border-white/5 py-24"
+        >
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16">Powered by Deep Tech</h2>
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="p-6 rounded-2xl bg-black/40 border border-white/10 hover:border-[#A068FF]/40 transition-colors">
-                <Code2 className="w-10 h-10 text-[#A068FF] mb-4" />
+              <div className="p-6 rounded-2xl bg-black/40 border border-white/10 hover:border-[#A068FF]/40 transition-colors group hover:-translate-y-2 duration-300">
+                <Code2 className="w-10 h-10 text-[#A068FF] mb-4 group-hover:scale-110 transition-transform" />
                 <h3 className="text-lg font-bold text-white mb-2">Automated Code Execution</h3>
                 <p className="text-slate-400 text-sm leading-relaxed">Integrated with Judge0 Sandbox to compile, run, and score code quality, speed, and logical efficiency automatically.</p>
               </div>
-              <div className="p-6 rounded-2xl bg-black/40 border border-white/10 hover:border-[#A068FF]/40 transition-colors">
-                <BrainCircuit className="w-10 h-10 text-[#A068FF] mb-4" />
+              <div className="p-6 rounded-2xl bg-black/40 border border-white/10 hover:border-[#A068FF]/40 transition-colors group hover:-translate-y-2 duration-300">
+                <BrainCircuit className="w-10 h-10 text-[#A068FF] mb-4 group-hover:scale-110 transition-transform" />
                 <h3 className="text-lg font-bold text-white mb-2">AI Plagiarism Guard</h3>
                 <p className="text-slate-400 text-sm leading-relaxed">PyTorch-based Abstract Syntax Tree (AST) analysis to detect if code was generated by ChatGPT or copied from public repos.</p>
               </div>
-              <div className="p-6 rounded-2xl bg-black/40 border border-white/10 hover:border-[#A068FF]/40 transition-colors">
-                <BadgeCheck className="w-10 h-10 text-[#A068FF] mb-4" />
+              <div className="p-6 rounded-2xl bg-black/40 border border-white/10 hover:border-[#A068FF]/40 transition-colors group hover:-translate-y-2 duration-300">
+                <BadgeCheck className="w-10 h-10 text-[#A068FF] mb-4 group-hover:scale-110 transition-transform" />
                 <h3 className="text-lg font-bold text-white mb-2">Verified Academic Badges</h3>
                 <p className="text-slate-400 text-sm leading-relaxed">A dual-verification engine where college professors and alumni endorse student projects, stored securely as tamper-proof credentials.</p>
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
+
+        {/* STAKEHOLDERS IMPACT */}
+        <motion.section 
+          id="impact" 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="w-full max-w-7xl mx-auto px-6 py-24"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-4">Value for the Ecosystem</h2>
+          <p className="text-slate-400 text-center max-w-2xl mx-auto mb-16">Creating a win-win scenario for all 3 major stakeholders.</p>
+          
+          <div className="grid lg:grid-cols-3 gap-8">
+            <div className="p-8 rounded-3xl bg-slate-900 border border-white/5 relative overflow-hidden group hover:border-blue-500/50 transition-colors duration-300">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600"></div>
+              <h3 className="text-xl font-bold text-white mb-4">For Students</h3>
+              <p className="text-slate-400 mb-4 text-sm">Tier-2/3 Focus</p>
+              <ul className="space-y-3 text-sm text-slate-300">
+                <li>• <strong className="text-white">Equal Opportunity:</strong> Bias-free selection.</li>
+                <li>• <strong className="text-white">Continuous Learning:</strong> AI skill-gap feedback.</li>
+                <li>• <strong className="text-white">Faster Hiring:</strong> Direct invites without cold emails.</li>
+              </ul>
+            </div>
+
+            <div className="p-8 rounded-3xl bg-slate-900 border border-white/5 relative overflow-hidden group hover:border-emerald-500/50 transition-colors duration-300">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-emerald-600"></div>
+              <h3 className="text-xl font-bold text-white mb-4">For Academia</h3>
+              <p className="text-slate-400 mb-4 text-sm">Colleges & Universities</p>
+              <ul className="space-y-3 text-sm text-slate-300">
+                <li>• <strong className="text-white">NIRF & NAAC:</strong> Verified placement data points.</li>
+                <li>• <strong className="text-white">Auto Verification:</strong> 1-click professor dashboards.</li>
+                <li>• <strong className="text-white">Curriculum Sync:</strong> Real-time industry alignment.</li>
+              </ul>
+            </div>
+
+            <div className="p-8 rounded-3xl bg-slate-900 border border-white/5 relative overflow-hidden group hover:border-orange-500/50 transition-colors duration-300">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-red-600"></div>
+              <h3 className="text-xl font-bold text-white mb-4">For Industry</h3>
+              <p className="text-slate-400 mb-4 text-sm">Recruiters & Tech Firms</p>
+              <ul className="space-y-3 text-sm text-slate-300">
+                <li>• <strong className="text-white">Zero Fake Resumes:</strong> 100% verified Git commits.</li>
+                <li>• <strong className="text-white">60% Cost Reduction:</strong> Pre-screened candidates.</li>
+                <li>• <strong className="text-white">Show, Don't Tell:</strong> Hire based on real code.</li>
+              </ul>
+            </div>
+          </div>
+        </motion.section>
 
         {/* FOOTER */}
         <footer className="border-t border-white/10 bg-[#060218] py-12 px-6">
