@@ -84,41 +84,32 @@ const NavLink = ({ children, href }: any) => (
 );
 
 const Orbit = ({ size, duration, direction, children }: any) => (
-  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 orbit-border" style={{ width: size, height: size, animation: `orbit-${direction} ${duration}s linear infinite` }}>
+  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 orbit-border z-0" 
+       style={{ width: size, height: size, animation: `orbit-${direction} ${duration}s linear infinite` }}>
     {children}
   </div>
 );
 
 const Avatar = ({ orbitDirection, orbitDuration, angle, size = 58, img, glow, delay, rounded = 'rounded-full' }: any) => {
-  const rad = angle * Math.PI / 180;
-  const left = `calc(50% + ${Math.cos(rad) * 50}%)`;
-  const top = `calc(50% + ${Math.sin(rad) * 50}%)`;
-  const counterAnim = orbitDirection === 'left' ? 'spin-forward' : 'spin-reverse';
-
+  const reverseDir = orbitDirection === 'left' ? 'right' : 'left';
   return (
-    <div className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left, top }}>
-      <div style={{ animation: `${counterAnim} ${orbitDuration}s linear infinite` }}>
-        <div className="opacity-0 animate-[avatar-fly-in_0.8s_cubic-bezier(0.22,1,0.36,1)_forwards]" style={{ animationDelay: `${delay}s` }}>
-          <img src={img} className={`${rounded} ${glow} object-cover`} style={{ width: size, height: size }} alt="avatar" />
+    <div className="absolute top-1/2 left-1/2 pointer-events-none" style={{ width: '100%', height: '100%', transform: `translate(-50%, -50%) rotate(${angle}deg)` }}>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 animate-[avatar-fly-in_0.8s_cubic-bezier(0.22,1,0.36,1)_forwards] pointer-events-auto" style={{ animationDelay: `${delay}s`, width: size, height: size }}>
+        <div className={`w-full h-full ${rounded} overflow-hidden border border-white/10 bg-[#060218] ${glow}`} style={{ animation: `orbit-${reverseDir} ${orbitDuration}s linear infinite` }}>
+          <img src={img} alt="Avatar" className="w-full h-full object-cover" />
         </div>
       </div>
     </div>
   );
 };
 
-const IconNode = ({ orbitDirection, orbitDuration, angle, size = 50, glow = 'shadow-lg', delay, rounded = 'rounded-xl', children }: any) => {
-  const rad = angle * Math.PI / 180;
-  const left = `calc(50% + ${Math.cos(rad) * 50}%)`;
-  const top = `calc(50% + ${Math.sin(rad) * 50}%)`;
-  const counterAnim = orbitDirection === 'left' ? 'spin-forward' : 'spin-reverse';
-
+const IconNode = ({ orbitDirection, orbitDuration, angle, size = 50, glow = 'shadow-[0_0_15px_rgba(255,255,255,0.1)]', delay, rounded = 'rounded-xl', children }: any) => {
+  const reverseDir = orbitDirection === 'left' ? 'right' : 'left';
   return (
-    <div className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left, top }}>
-      <div style={{ animation: `${counterAnim} ${orbitDuration}s linear infinite` }}>
-        <div className="opacity-0 animate-[avatar-fly-in_0.8s_cubic-bezier(0.22,1,0.36,1)_forwards]" style={{ animationDelay: `${delay}s` }}>
-          <div className={`flex items-center justify-center bg-[#0d0726] border border-white/10 ${rounded} ${glow}`} style={{ width: size, height: size }}>
-            {children}
-          </div>
+    <div className="absolute top-1/2 left-1/2 pointer-events-none" style={{ width: '100%', height: '100%', transform: `translate(-50%, -50%) rotate(${angle}deg)` }}>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 animate-[avatar-fly-in_0.8s_cubic-bezier(0.22,1,0.36,1)_forwards] pointer-events-auto" style={{ animationDelay: `${delay}s`, width: size, height: size }}>
+        <div className={`w-full h-full flex items-center justify-center bg-[#0d0726] border border-white/10 ${rounded} ${glow}`} style={{ animation: `orbit-${reverseDir} ${orbitDuration}s linear infinite` }}>
+          {children}
         </div>
       </div>
     </div>
@@ -157,8 +148,6 @@ export default function Home() {
         @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
-        @keyframes spin-forward { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes spin-reverse { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
         @keyframes float-cursor { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-10px) rotate(-5deg); } }
         .orbit-border {
           border: 1px solid rgba(160, 104, 255, 0.35);
@@ -354,7 +343,7 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: false, margin: "-150px" }}
-          className="w-full min-h-[100svh] flex flex-col justify-center max-w-7xl mx-auto px-6 py-24 border-t border-white/5 relative"
+          className="w-full max-w-7xl mx-auto px-6 py-24 border-t border-white/5 relative"
         >
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">The Talent Verification Crisis</h2>
@@ -396,7 +385,7 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: false, margin: "-150px" }}
-          className="w-full min-h-[100svh] flex flex-col justify-center bg-[#070319] border-y border-white/5 py-24"
+          className="w-full bg-[#070319] border-y border-white/5 py-24"
         >
           <div className="max-w-7xl mx-auto px-6 w-full">
             <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16">Powered by Deep Tech</h2>
@@ -427,7 +416,7 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: false, margin: "-150px" }}
-          className="w-full min-h-[100svh] flex flex-col justify-center max-w-7xl mx-auto px-6 py-24"
+          className="w-full max-w-7xl mx-auto px-6 py-24"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-4">Value for the Ecosystem</h2>
           <p className="text-slate-400 text-center max-w-2xl mx-auto mb-16">Creating a win-win scenario for all 3 major stakeholders.</p>
