@@ -357,7 +357,7 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: false, margin: "-100px" }}
-          className="w-full min-h-[100svh] flex flex-col justify-center max-w-7xl mx-auto px-6 py-24 border-t border-white/5 relative"
+          className="w-full max-w-7xl mx-auto px-6 py-32 md:py-40 border-t border-white/5 relative"
         >
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">The Talent Verification Crisis</h2>
@@ -399,7 +399,7 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: false, margin: "-100px" }}
-          className="w-full min-h-[100svh] flex flex-col justify-center bg-[#070319] border-y border-white/5 py-24"
+          className="w-full bg-[#070319] border-y border-white/5 py-32 md:py-40"
         >
           <div className="max-w-7xl mx-auto px-6 w-full">
             <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16">Powered by Deep Tech</h2>
@@ -430,7 +430,7 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: false, margin: "-100px" }}
-          className="w-full min-h-[100svh] flex flex-col justify-center max-w-7xl mx-auto px-6 py-24"
+          className="w-full max-w-7xl mx-auto px-6 py-32 md:py-40"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-4">Value for the Ecosystem</h2>
           <p className="text-slate-400 text-center max-w-2xl mx-auto mb-16">Creating a win-win scenario for all 3 major stakeholders.</p>
