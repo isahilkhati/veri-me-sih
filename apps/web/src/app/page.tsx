@@ -106,6 +106,25 @@ const Avatar = ({ orbitDirection, orbitDuration, angle, size = 58, img, glow, de
   );
 };
 
+const IconNode = ({ orbitDirection, orbitDuration, angle, size = 50, glow = 'shadow-lg', delay, rounded = 'rounded-xl', children }: any) => {
+  const rad = angle * Math.PI / 180;
+  const left = `calc(50% + ${Math.cos(rad) * 50}%)`;
+  const top = `calc(50% + ${Math.sin(rad) * 50}%)`;
+  const counterDir = orbitDirection === 'left' ? 'right' : 'left';
+
+  return (
+    <div className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left, top }}>
+      <div className={`animate-[orbit-${counterDir}_${orbitDuration}s_linear_infinite]`}>
+        <div className="opacity-0 animate-[avatar-fly-in_0.8s_cubic-bezier(0.22,1,0.36,1)_forwards]" style={{ animationDelay: `${delay}s` }}>
+          <div className={`flex items-center justify-center bg-[#0d0726] border border-white/10 ${rounded} ${glow}`} style={{ width: size, height: size }}>
+            {children}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function Home() {
   const verifiedCount = useCountUp(20, 2000, 1200);
   const logos = [
@@ -140,8 +159,8 @@ export default function Home() {
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
         @keyframes float-cursor { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-10px) rotate(-5deg); } }
         .orbit-border {
-          border: 1px solid transparent;
-          background: linear-gradient(#060218, #060218) padding-box, linear-gradient(180deg, rgba(217, 161, 255, 0) 0%, rgba(217, 161, 255, 1) 43%, rgba(217, 161, 255, 0) 100%) border-box;
+          border: 1px solid rgba(160, 104, 255, 0.35);
+          box-shadow: 0 0 30px rgba(160, 104, 255, 0.15), inset 0 0 30px rgba(160, 104, 255, 0.15);
           border-radius: 50%;
         }
         .fade-down { animation: fadeDown 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
@@ -262,23 +281,40 @@ export default function Home() {
           <div className="hero-circles-wrapper z-10 scale-in" style={{ animationDelay: '0.3s' }}>
             <div className="hero-circles-responsive">
               <div className="hero-circles">
-                <Orbit size={353} duration={30} direction="left">
-              <Avatar orbitDirection="left" orbitDuration={30} angle={270} img="https://polo-pecan-73837341.figma.site/_assets/v11/aa51718fb3af3637e6d666b6543fc27a175fada6.png" glow="shadow-[0_0_20px_rgba(160,104,255,0.6)]" delay={0.6} rounded="rounded-[20px]" />
-            </Orbit>
-            <Orbit size={501} duration={40} direction="right">
-              <Avatar orbitDirection="right" orbitDuration={40} angle={60} img="https://polo-pecan-73837341.figma.site/_assets/v11/ca755f7f93c1126fb8bdbf99ab364a33aa9ab272.png" glow="shadow-[0_0_20px_rgba(255,215,0,0.6)]" delay={0.9} />
-              <Avatar orbitDirection="right" orbitDuration={40} angle={180} size={78} img="https://polo-pecan-73837341.figma.site/_assets/v11/dc01064c7093dcc32674876ee3cf5e41c4a485c6.png" glow="shadow-[0_0_20px_rgba(255,105,180,0.6)]" delay={1.2} />
-              <Avatar orbitDirection="right" orbitDuration={40} angle={300} img="https://polo-pecan-73837341.figma.site/_assets/v11/d5470a58b02388336141575048720f19a50de832.png" glow="shadow-[0_0_20px_rgba(0,191,255,0.6)]" delay={1.4} rounded="rounded-[20px]" />
-            </Orbit>
-            <Orbit size={649} duration={50} direction="right">
-              <Avatar orbitDirection="right" orbitDuration={50} angle={130} size={88} img="https://polo-pecan-73837341.figma.site/_assets/v11/018736aa5d0275c4ce56cfebaf2ae3007d81ca1e.png" glow="shadow-[0_0_20px_rgba(255,105,180,0.6)]" delay={1.7} />
-            </Orbit>
-            <Orbit size={797} duration={60} direction="left">
-              <Avatar orbitDirection="left" orbitDuration={60} angle={30} img="https://polo-pecan-73837341.figma.site/_assets/v11/c76d8a0b99676de31c014344bfaf75bad090758d.png" glow="shadow-[0_0_20px_rgba(160,104,255,0.6)]" delay={1.9} />
-              <Avatar orbitDirection="left" orbitDuration={60} angle={95} size={88} img="https://polo-pecan-73837341.figma.site/_assets/v11/7b1b5f039de7b54cc9913e96c1923c3b15a157fa.png" glow="shadow-[0_0_20px_rgba(255,165,0,0.6)]" delay={2.1} rounded="rounded-[24px]" />
-              <Avatar orbitDirection="left" orbitDuration={60} angle={220} size={88} img="https://polo-pecan-73837341.figma.site/_assets/v11/9ae171d8895199349755c43fbff00e122221a027.png" glow="shadow-[0_0_20px_rgba(255,105,180,0.6)]" delay={2.2} rounded="rounded-[24px]" />
-              <Avatar orbitDirection="left" orbitDuration={60} angle={320} img="https://polo-pecan-73837341.figma.site/_assets/v11/926c9eb7b4bc1df846fa0e39f0b0dc3fefd80671.png" glow="shadow-[0_0_20px_rgba(160,104,255,0.6)]" delay={2.3} />
-            </Orbit>
+                <Orbit size={300} duration={20} direction="left">
+                  <Avatar orbitDirection="left" orbitDuration={20} angle={270} img="https://polo-pecan-73837341.figma.site/_assets/v11/aa51718fb3af3637e6d666b6543fc27a175fada6.png" glow="shadow-[0_0_20px_rgba(160,104,255,0.6)]" delay={0.6} rounded="rounded-[20px]" />
+                  <IconNode orbitDirection="left" orbitDuration={20} angle={90} size={48} delay={0.8}>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" className="w-6 h-6 invert" />
+                  </IconNode>
+                </Orbit>
+                <Orbit size={450} duration={35} direction="right">
+                  <Avatar orbitDirection="right" orbitDuration={35} angle={60} img="https://polo-pecan-73837341.figma.site/_assets/v11/ca755f7f93c1126fb8bdbf99ab364a33aa9ab272.png" glow="shadow-[0_0_20px_rgba(255,215,0,0.6)]" delay={0.9} />
+                  <IconNode orbitDirection="right" orbitDuration={35} angle={150} size={50} delay={1.1}>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" className="w-6 h-6" />
+                  </IconNode>
+                  <Avatar orbitDirection="right" orbitDuration={35} angle={240} size={78} img="https://polo-pecan-73837341.figma.site/_assets/v11/dc01064c7093dcc32674876ee3cf5e41c4a485c6.png" glow="shadow-[0_0_20px_rgba(255,105,180,0.6)]" delay={1.2} />
+                  <IconNode orbitDirection="right" orbitDuration={35} angle={330} size={45} delay={1.3}>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg" alt="GitLab" className="w-6 h-6" />
+                  </IconNode>
+                </Orbit>
+                <Orbit size={600} duration={45} direction="left">
+                  <Avatar orbitDirection="left" orbitDuration={45} angle={130} size={88} img="https://polo-pecan-73837341.figma.site/_assets/v11/018736aa5d0275c4ce56cfebaf2ae3007d81ca1e.png" glow="shadow-[0_0_20px_rgba(255,105,180,0.6)]" delay={1.4} />
+                  <IconNode orbitDirection="left" orbitDuration={45} angle={40} size={55} delay={1.5}>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" className="w-7 h-7" />
+                  </IconNode>
+                  <Avatar orbitDirection="left" orbitDuration={45} angle={280} img="https://polo-pecan-73837341.figma.site/_assets/v11/c76d8a0b99676de31c014344bfaf75bad090758d.png" glow="shadow-[0_0_20px_rgba(160,104,255,0.6)]" delay={1.6} />
+                </Orbit>
+                <Orbit size={750} duration={55} direction="right">
+                  <Avatar orbitDirection="right" orbitDuration={55} angle={30} img="https://polo-pecan-73837341.figma.site/_assets/v11/d5470a58b02388336141575048720f19a50de832.png" glow="shadow-[0_0_20px_rgba(0,191,255,0.6)]" delay={1.7} rounded="rounded-[20px]" />
+                  <IconNode orbitDirection="right" orbitDuration={55} angle={95} size={50} delay={1.8}>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" className="w-7 h-7" />
+                  </IconNode>
+                  <Avatar orbitDirection="right" orbitDuration={55} angle={160} size={88} img="https://polo-pecan-73837341.figma.site/_assets/v11/7b1b5f039de7b54cc9913e96c1923c3b15a157fa.png" glow="shadow-[0_0_20px_rgba(255,165,0,0.6)]" delay={1.9} rounded="rounded-[24px]" />
+                  <Avatar orbitDirection="right" orbitDuration={55} angle={240} size={88} img="https://polo-pecan-73837341.figma.site/_assets/v11/9ae171d8895199349755c43fbff00e122221a027.png" glow="shadow-[0_0_20px_rgba(255,105,180,0.6)]" delay={2.0} rounded="rounded-[24px]" />
+                  <IconNode orbitDirection="right" orbitDuration={55} angle={300} size={45} delay={2.1}>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node" className="w-6 h-6" />
+                  </IconNode>
+                </Orbit>
             
             {/* Center Label */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10 flex flex-col items-center justify-center opacity-0 animate-[fadeUp_0.8s_cubic-bezier(0.22,1,0.36,1)_forwards]" style={{ animationDelay: '1.2s' }}>
@@ -309,10 +345,10 @@ export default function Home() {
         {/* COMPARISON SECTION */}
         <motion.section 
           id="problem" 
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          viewport={{ once: true, margin: "-100px" }}
+          initial={{ opacity: 0, y: 80, scale: 0.85 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, margin: "-50px" }}
           className="w-full max-w-7xl mx-auto px-6 py-24 border-t border-white/5 relative"
         >
           <div className="text-center mb-16">
@@ -351,10 +387,10 @@ export default function Home() {
         {/* CORE FEATURES */}
         <motion.section 
           id="solution" 
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          viewport={{ once: true, margin: "-100px" }}
+          initial={{ opacity: 0, y: 80, scale: 0.85 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, margin: "-50px" }}
           className="w-full bg-[#070319] border-y border-white/5 py-24"
         >
           <div className="max-w-7xl mx-auto px-6">
@@ -382,10 +418,10 @@ export default function Home() {
         {/* STAKEHOLDERS IMPACT */}
         <motion.section 
           id="impact" 
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          viewport={{ once: true, margin: "-100px" }}
+          initial={{ opacity: 0, y: 80, scale: 0.85 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, margin: "-50px" }}
           className="w-full max-w-7xl mx-auto px-6 py-24"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-4">Value for the Ecosystem</h2>
