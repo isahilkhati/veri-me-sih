@@ -96,12 +96,12 @@ const Orbit = ({ size, duration, direction, children }: any) => {
 
 const Avatar = ({ orbitDirection, orbitDuration, angle, size = 58, img, glow, delay, rounded = 'rounded-full' }: any) => {
   const rad = angle * Math.PI / 180;
-  const left = `calc(50% + ${Math.cos(rad) * 50}%)`;
-  const top = `calc(50% + ${Math.sin(rad) * 50}%)`;
+  const left = `calc(50% + ${(Math.cos(rad) * 50).toFixed(4)}%)`;
+  const top = `calc(50% + ${(Math.sin(rad) * 50).toFixed(4)}%)`;
   const counterAnim = orbitDirection === 'left' ? 'spin-forward' : 'spin-reverse';
 
   return (
-    <div className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left, top, width: size, height: size }}>
+    <div className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left, top, width: `${size}px`, height: `${size}px` }}>
       <div className="w-full h-full" style={{ animation: `${counterAnim} ${orbitDuration}s linear infinite` }}>
         <div className={`w-full h-full opacity-0 animate-[avatar-fly-in_0.8s_cubic-bezier(0.22,1,0.36,1)_forwards] ${rounded} ${glow} overflow-hidden border border-white/10 bg-[#060218]`} style={{ animationDelay: `${delay}s` }}>
           <img src={img} alt="Avatar" className="w-full h-full object-cover" />
@@ -113,12 +113,12 @@ const Avatar = ({ orbitDirection, orbitDuration, angle, size = 58, img, glow, de
 
 const IconNode = ({ orbitDirection, orbitDuration, angle, size = 50, glow = 'shadow-[0_0_15px_rgba(255,255,255,0.1)]', delay, rounded = 'rounded-xl', children }: any) => {
   const rad = angle * Math.PI / 180;
-  const left = `calc(50% + ${Math.cos(rad) * 50}%)`;
-  const top = `calc(50% + ${Math.sin(rad) * 50}%)`;
+  const left = `calc(50% + ${(Math.cos(rad) * 50).toFixed(4)}%)`;
+  const top = `calc(50% + ${(Math.sin(rad) * 50).toFixed(4)}%)`;
   const counterAnim = orbitDirection === 'left' ? 'spin-forward' : 'spin-reverse';
 
   return (
-    <div className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left, top, width: size, height: size }}>
+    <div className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left, top, width: `${size}px`, height: `${size}px` }}>
       <div className="w-full h-full" style={{ animation: `${counterAnim} ${orbitDuration}s linear infinite` }}>
         <div className={`w-full h-full opacity-0 animate-[avatar-fly-in_0.8s_cubic-bezier(0.22,1,0.36,1)_forwards] flex items-center justify-center bg-[#0d0726] border border-white/10 ${rounded} ${glow}`} style={{ animationDelay: `${delay}s` }}>
           {children}
