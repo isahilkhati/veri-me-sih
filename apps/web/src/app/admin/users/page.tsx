@@ -30,7 +30,7 @@ export default function UsersPage() {
       if (!token) return;
 
       const roleQuery = roleFilter !== 'All' ? `&role=${roleFilter.toUpperCase()}` : '';
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/admin/users?page=${page}&limit=10&search=${search}${roleQuery}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, "") || "http://localhost:4000"}/api/admin/users?page=${page}&limit=10&search=${search}${roleQuery}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.ok) {
@@ -61,7 +61,7 @@ export default function UsersPage() {
     e.preventDefault();
     try {
       const { data: { session } } = await supabase.auth.getSession();
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/admin/users/${selectedUser.id}/reset-password`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, "") || "http://localhost:4000"}/api/admin/users/${selectedUser.id}/reset-password`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export default function UsersPage() {
     e.preventDefault();
     try {
       const { data: { session } } = await supabase.auth.getSession();
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/admin/users/${selectedUser.id}/role`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, "") || "http://localhost:4000"}/api/admin/users/${selectedUser.id}/role`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ export default function UsersPage() {
   const handleDeleteUser = async () => {
     try {
       const { data: { session } } = await supabase.auth.getSession();
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/admin/users/${selectedUser.id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, "") || "http://localhost:4000"}/api/admin/users/${selectedUser.id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${session?.access_token}` }
       });

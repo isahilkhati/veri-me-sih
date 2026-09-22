@@ -16,7 +16,7 @@ export default function AIStatsPage() {
         const token = session?.access_token;
         if (!token) return;
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/admin/stats`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, "") || "http://localhost:4000"}/api/admin/stats`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (res.ok) {
