@@ -1,7 +1,13 @@
 'use client';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { GitBranch, Star, GitFork, ExternalLink, Loader2, CheckCircle2, Layout, Gitlab } from 'lucide-react';
+import { GitBranch, Star, GitFork, ExternalLink, Loader2, CheckCircle2, Layout } from 'lucide-react';
+
+const Gitlab = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 0 1-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 0 1 5.1 2h.02a.43.43 0 0 1 .4.27l2.48 7.64h8l2.48-7.64a.43.43 0 0 1 .4-.27h.02a.42.42 0 0 1 .39.27l2.44 7.51 1.22 3.78a.84.84 0 0 1-.3.94z" />
+  </svg>
+);
 
 export default function PortfolioSyncPage() {
   const [githubUser, setGithubUser] = useState('');
