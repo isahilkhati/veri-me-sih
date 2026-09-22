@@ -19,10 +19,10 @@ export default function AdminDashboard() {
         if (!token) return;
 
         const [statsRes, activityRes] = await Promise.all([
-          fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/admin/stats`, {
+          fetch(`${process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, "") || "http://localhost:4000"}/api/admin/stats`, {
             headers: { Authorization: `Bearer ${token}` }
           }),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/api/admin/activity?limit=5`, {
+          fetch(`${process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, "") || "http://localhost:4000"}/api/admin/activity?limit=5`, {
             headers: { Authorization: `Bearer ${token}` }
           })
         ]);
