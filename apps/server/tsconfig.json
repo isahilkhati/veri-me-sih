@@ -8,8 +8,6 @@
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "CommonJS",
-    "moduleResolution": "node10",
-    "ignoreDeprecations": "5.0",
     "target": "es2022",
     "types": ["node"],
     "esModuleInterop": true,
