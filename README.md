@@ -1,5 +1,5 @@
 # AI-Powered Industry Problem Resolution and Collaborative Research Platform (IPRCRP)
-
+@Developer Sahil Jangra
 A production-ready platform connecting Students, Colleges, and Industry with AI-powered features.
 
 ## Architecture
