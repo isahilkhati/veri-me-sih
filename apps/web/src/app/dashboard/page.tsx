@@ -11,7 +11,7 @@ export default function DashboardOverview() {
       className="max-w-5xl"
     >
       <header className="mb-10">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Welcome to Veri-ME (SIH Demo)</h1>
+        <h1 className="text-3xl font-bold tracking-tight mb-2">Welcome to Kaushal Setu (SIH Demo)</h1>
         <p className="text-zinc-400 text-sm">Verify the Candidate, Trust the Profile.</p>
       </header>
 
@@ -20,10 +20,10 @@ export default function DashboardOverview() {
           <div className="absolute top-0 right-0 p-4 opacity-10">
             <ShieldCheck className="w-32 h-32" />
           </div>
-          <h2 className="text-xl font-bold mb-3 relative z-10 text-white">What is Veri-ME?</h2>
+          <h2 className="text-xl font-bold mb-3 relative z-10 text-white">What is Kaushal Setu?</h2>
           <p className="text-zinc-400 text-sm leading-relaxed relative z-10">
-            Veri-ME is a decentralized, Proof-of-Work based talent verification platform designed to eliminate resume fraud. 
-            Instead of trusting a PDF resume, Veri-ME connects directly to a candidate's actual work (GitHub, GitLab, Figma) 
+            Kaushal Setu is a decentralized, Proof-of-Work based talent verification platform designed to eliminate resume fraud. 
+            Instead of trusting a PDF resume, Kaushal Setu connects directly to a candidate's actual work (GitHub, GitLab, Figma) 
             and verifies their skills automatically using AI and Sandbox execution.
           </p>
         </div>
@@ -35,7 +35,7 @@ export default function DashboardOverview() {
           <h2 className="text-xl font-bold mb-3 relative z-10 text-white">The SIH 2026 Problem</h2>
           <p className="text-zinc-400 text-sm leading-relaxed relative z-10">
             <strong>Problem ID: SIH26044.</strong> Currently, 55% of candidates exaggerate skills on resumes, and background verification is painfully slow. 
-            Veri-ME solves this by creating a zero-trust architecture where skills are proven by live code execution, plagiarism detection, and institutional endorsements.
+            Kaushal Setu solves this by creating a zero-trust architecture where skills are proven by live code execution, plagiarism detection, and institutional endorsements.
           </p>
         </div>
       </div>

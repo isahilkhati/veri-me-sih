@@ -71,7 +71,7 @@ export default function AdminDashboard() {
     <div className="space-y-8">
       <div>
         <h1 className="text-2xl font-semibold mb-2">Platform Overview</h1>
-        <p className="text-zinc-400 text-sm">Welcome to the Veri-ME Command Center.</p>
+        <p className="text-zinc-400 text-sm">Welcome to the Kaushal Setu Command Center.</p>
       </div>
 
       <motion.div 

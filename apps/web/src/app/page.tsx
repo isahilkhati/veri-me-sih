@@ -220,7 +220,7 @@ export default function Home() {
           <div className="flex items-center gap-12">
             <Link href="/" className="flex items-center gap-2 text-white group">
               <ShieldCheck className="h-8 w-8 text-[#A068FF] group-hover:scale-110 transition-transform" />
-              <span className={`font-bold tracking-wide text-xl ${urbanist.className}`}>Veri-ME</span>
+              <span className={`font-bold tracking-wide text-xl ${urbanist.className}`}>Kaushal Setu</span>
             </Link>
             <nav className="hidden md:flex gap-8 mobile-hide">
               <a href="#problem" onClick={(e) => handleSmoothScroll(e, 'problem')} className="relative group text-white text-[15px] font-medium transition-colors cursor-pointer">
@@ -262,7 +262,7 @@ export default function Home() {
             </div>
 
             <p className="text-lg text-slate-300 max-w-xl mb-10 leading-relaxed fade-up" style={{ animationDelay: '2.5s' }}>
-              Eliminate resume fraud and skill inflation. Veri-ME replaces PDFs with a live, 
+              Eliminate resume fraud and skill inflation. Kaushal Setu replaces PDFs with a live, 
               sandboxed Proof-of-Work engine backed by AI integrity checks and Academic endorsements.
             </p>
             
@@ -381,7 +381,7 @@ export default function Home() {
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#A068FF]/10 blur-[100px] rounded-full group-hover:bg-[#A068FF]/20 transition-colors"></div>
               <div className="flex items-center gap-3 mb-6 relative z-10">
                 <ShieldCheck className="w-6 h-6 text-[#A068FF]" />
-                <h3 className="text-xl font-bold text-white">The Veri-ME Way</h3>
+                <h3 className="text-xl font-bold text-white">The Kaushal Setu Way</h3>
               </div>
               <ul className="space-y-5 relative z-10">
                 <li className="flex items-start gap-3 text-slate-300"><span className="text-[#A068FF] mt-1">✅</span><div><strong className="text-white">Proof-of-Work:</strong> Live syncs with GitHub, Figma & GitLab.</div></li>
@@ -476,7 +476,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-[#A068FF]" />
-              <span className="font-bold text-white">Veri-ME</span>
+              <span className="font-bold text-white">Kaushal Setu</span>
             </div>
             <p className="text-sm text-slate-500">
               Team Zero Day Nextron • Smart India Hackathon 2026 • SIH26044

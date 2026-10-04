@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Veri-ME | Verify the Candidate, Trust the Profile",
+  title: "Kaushal Setu | Verify the Candidate, Trust the Profile",
   description: "Portal for Academia-Industry collaboration for Skill Mapping, Internships and Placement using Proof-of-Work, Sandboxed Code Execution, and AI Plagiarism Checks.",
 };
 

@@ -8,7 +8,7 @@ export default function ConfigPage() {
   const [saving, setSaving] = useState(false);
 
   const [config, setConfig] = useState({
-    appName: 'Nexus AI',
+    appName: 'Kaushal Setu AI',
     supportEmail: 'support@nexus.ai',
     maintenanceMode: false,
     aiProvider: 'gemini',

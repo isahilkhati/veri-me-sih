@@ -42,7 +42,7 @@ export default function About() {
           
           <div className="space-y-8 text-lg md:text-xl text-zinc-300 font-light leading-relaxed">
             <p>
-              The AI-Powered Industry Problem Resolution and Collaborative Research Platform (Nexus AI) is designed to bridge the gap between academia and industry through an advanced intelligence network.
+              The AI-Powered Industry Problem Resolution and Collaborative Research Platform (Kaushal Setu AI) is designed to bridge the gap between academia and industry through an advanced intelligence network.
             </p>
             <p>
               We connect students, institutions, and companies through a unified, high-performance ecosystem. By crowdsourcing industry challenges to verified academic talent, we accelerate research and streamline hiring.

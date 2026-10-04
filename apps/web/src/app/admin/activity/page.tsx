@@ -63,7 +63,7 @@ export default function AIActivityPage() {
                   <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center gap-2">
                       <span className="font-medium text-sm text-zinc-200">
-                        {msg.role === 'assistant' ? 'Nexus AI' : msg.ai_conversations?.profiles?.full_name || 'Anonymous User'}
+                        {msg.role === 'assistant' ? 'Kaushal Setu AI' : msg.ai_conversations?.profiles?.full_name || 'Anonymous User'}
                       </span>
                       <span className="text-xs px-2 py-0.5 rounded-full bg-black/30 border border-white/5 text-zinc-400">
                         {msg.model || 'gemini'}

@@ -23,7 +23,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <div className="p-6 border-b border-white/10">
           <Link href="/" className="flex items-center gap-2 text-white">
             <ShieldCheck className="h-5 w-5 text-orange-500" />
-            <span className="font-semibold tracking-wide text-sm">Veri-ME</span>
+            <span className="font-semibold tracking-wide text-sm">Kaushal Setu</span>
           </Link>
         </div>
         <nav className="flex-1 p-4 flex flex-col gap-2">
